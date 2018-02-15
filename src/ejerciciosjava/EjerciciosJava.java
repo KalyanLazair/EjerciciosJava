@@ -6,10 +6,7 @@ package ejerciciosjava;
 
 import java.util.Arrays;
 
-/**
- *
- * @author Thomas
- */
+
 public class EjerciciosJava {
 //Los corchetes son para saber que estamos trabajando con un array de ints.
     /*numeroMáximo lo comparamos con el número que hay en i en ese momento. Si es menor que el número i
@@ -82,6 +79,8 @@ public class EjerciciosJava {
        
     }
     
+    //Ejercicio del isograma.
+    
     public boolean isograma(String iso){
         String cadena = " ";//Guardaremos los chars a comprobar.
         cadena.toLowerCase();//ponemos el stirng a lowercase para evitar problemas con mayúsculas.
@@ -135,7 +134,8 @@ public class EjerciciosJava {
             }
             return false;
     }
-    
+     
+    //Ejercicio del acrónimo.
     
     public String acronimo(String acro){
        String cadena="";
@@ -159,7 +159,8 @@ public class EjerciciosJava {
         //Retornamos la suma del string primera y el string cadena.
        return primera+cadena;
     }
-       /*Usar dos bucles for.*/ 
+       //Ejercicio del calendario.
+    
     public String calendario(int n){
        String auxiliar=""; //string donde vamos a guardar el calendario.
        int contador=1; //inicio del calendario.
@@ -196,10 +197,30 @@ public class EjerciciosJava {
        return auxiliar; //retornamos auxiliar.
     }
     
-    public boolean escalera(char listaPalabras){
-        System.out.println(listaPalabras);
-    return false;
+    //Ejercicio de la cadena de palabras.
+    
+    public boolean escalera(char[][] listaPalabras){
+        boolean presente=false;
+        
+       for(int j=0;j<listaPalabras.length;j++){
+           presente=false;
+        for(int i=0;i<listaPalabras[i].length;i++){
+            if(j<listaPalabras.length && presente==true && listaPalabras[j][i]!=listaPalabras[j+1][i]){
+               return false;
+            }
+            
+            if(j<listaPalabras.length && listaPalabras[j][i]!=listaPalabras[j+1][i]){
+              presente=true;
+           }
+            
+            
+           System.out.println(listaPalabras[j][i]);
+        }
+       }
+    return true;
     }
+    
+    //Ejercicio de la cadena de ADN.
     
      public int costeErrores(String a, String b){
          int auxiliar=0; //declaramos un int auxiliar donde vamos a guardar los valores que nos de el programa.
@@ -221,9 +242,28 @@ public class EjerciciosJava {
            }
          }
          
-         return auxiliar;
+         return auxiliar; //Retornamos el valor que nos haya dado el programa.
        }
+     
+    //Ejercicio de strstr. String y substring.
+     
+     public int strstr(String str1, String str2){
+        String toLowerCase = str1.toLowerCase();  //Ponemos los strings a lowercase para evitar problemas.
+        String toLowerCase1 = str2.toLowerCase();
+         int auxiliar=0;  //Declaramos el auxiliar donde vamos a guardar el resultado.
+         int pos=0; //Declaramos un segundo int que será la posición de los char en el segundo string.
+         
+         for(int i=0; i<str1.length();i++){
+           if(str1.charAt(i)==str2.charAt(pos) && str1.contains(str2)){  //En caso que encontremos el substring, devuelve la posición donde
+             auxiliar=i;                                                 //se encuentra el primer char del substring.
+           }else{
+            auxiliar=-1;                                                 //En caso contrario el int auxiliar lo pasamos a -1.
+           }
+         
+         }
     
+         return auxiliar; //Retornamos el auxiliar con la posición del substring o con -1 en caso de no haber substring.
+     }
     
     
     
@@ -258,7 +298,7 @@ public class EjerciciosJava {
       int n=6;
       System.out.println(ejercicio6.calendario(n));*/
       
-     /* EjerciciosJava ejercicio7=new EjerciciosJava();
+       EjerciciosJava ejercicio7=new EjerciciosJava();
       	char	[][]	listaPalabras	={
 					{'P',	'A',	'T',	'A'},
 					{'P',	'A',	'T',	'O'},
@@ -268,16 +308,21 @@ public class EjerciciosJava {
 					{'G',	'A',	'T',	'O'},
 					{'M',	'A',	'T',	'O'},
 								};
-       // System.out.println(ejercicio7.escalera(listaPalabras));*/
+        System.out.println(ejercicio7.escalera(listaPalabras));
        
-       EjerciciosJava ejercicio8=new EjerciciosJava();
+      /* EjerciciosJava ejercicio8=new EjerciciosJava();
        //String a="ACGT";
        //String b="TGCA";
        //String a="A-C-G-T-ACGT";
        //String b="TTGGCCAATGCA";
        String a="GGGA-GTATATCTGGACT"; //Esta cadena no es la original del enunciado. Se ha modificado para hacer pruebas y el
        String b="CCCTACTTA-AGA-CGGA"; //resultado que da es 8 puesto que tiene 3 nucleótidos desparejados y 2 mutaciones.
-       System.out.println(ejercicio8.costeErrores(a, b));
+       System.out.println(ejercicio8.costeErrores(a, b));*/
+      
+      /*EjerciciosJava ejercicio9=new EjerciciosJava();
+      String str1="variable";
+      String str2="ajo";
+      System.out.println(ejercicio9.strstr(str1,str2));*/
       
 }
     
