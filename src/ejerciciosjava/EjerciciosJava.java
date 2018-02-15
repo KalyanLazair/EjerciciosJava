@@ -205,11 +205,11 @@ public class EjerciciosJava {
        for(int j=0;j<listaPalabras.length;j++){
            presente=false;
         for(int i=0;i<listaPalabras[i].length;i++){
-            if(j<listaPalabras.length && presente==true && listaPalabras[j][i]!=listaPalabras[j+1][i]){
+            if(j+1<listaPalabras.length && presente==true && listaPalabras[j][i]!=listaPalabras[j+1][i]){
                return false;
             }
             
-            if(j<listaPalabras.length && listaPalabras[j][i]!=listaPalabras[j+1][i]){
+            if(j+1<listaPalabras.length && listaPalabras[j][i]!=listaPalabras[j+1][i]){
               presente=true;
            }
             
