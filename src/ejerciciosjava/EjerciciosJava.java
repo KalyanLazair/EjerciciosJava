@@ -83,7 +83,7 @@ public class EjerciciosJava {
     
     public boolean isograma(String iso){
         String cadena = " ";//Guardaremos los chars a comprobar.
-        cadena.toLowerCase();//ponemos el stirng a lowercase para evitar problemas con mayúsculas.
+        cadena=cadena.toLowerCase();//ponemos el stirng a lowercase para evitar problemas con mayúsculas.
         String caracter=" ";//Guardaremos el char a comprobar en cada momento.
            
         for(int i=0; i<iso.length(); i++){
@@ -200,24 +200,25 @@ public class EjerciciosJava {
     //Ejercicio de la cadena de palabras.
     
     public boolean escalera(char[][] listaPalabras){
-        boolean presente=false;
+        boolean presente=false;  //Declaramos un booleano que nos va a ayudar a determinar cuantas letras cambian.
         
        for(int j=0;j<listaPalabras.length;j++){
-           presente=false;
+           presente=false; //El booleano se inicia a false cada vez que demos una vuelta del bucle externo.
         for(int i=0;i<listaPalabras[i].length;i++){
-            if(j+1<listaPalabras.length && presente==true && listaPalabras[j][i]!=listaPalabras[j+1][i]){
-               return false;
-            }
+            if(j+1<listaPalabras.length && presente==true && listaPalabras[j][i]!=listaPalabras[j+1][i]){ 
+               return false;  //La primera condición protege de outofbounds. El booleano comprueba si hay chars distintos en
+            }                 //filas consiguientes cuando ya se ha detectado un char distinto. Retorna false en ese caso.
             
             if(j+1<listaPalabras.length && listaPalabras[j][i]!=listaPalabras[j+1][i]){
-              presente=true;
-           }
+              presente=true; //La primera condición nos protege del outofbounds. Comprueba si hay chars distintos en filas
+           }                 //consiguientes y situa el booleano a true en caso de hayarlo.
             
             
-           System.out.println(listaPalabras[j][i]);
+           System.out.println(listaPalabras[j][i]);  //Comprobación en consola.
         }
        }
-    return true;
+    return true;  //Una vez que hayamos terminado el bucle y este no haya retornado false por no haber encontrado
+                  //la condición, devuelve true.
     }
     
     //Ejercicio de la cadena de ADN.
@@ -264,6 +265,93 @@ public class EjerciciosJava {
     
          return auxiliar; //Retornamos el auxiliar con la posición del substring o con -1 en caso de no haber substring.
      }
+     
+     public boolean mudanzasJava(boolean[][] camion, int ancho, int alto){
+         int a=0;
+         int b=0;
+         
+         for(int j=0;j<camion.length;j++){
+            for(int i=0;i<camion[i].length;i++){
+              while(camion[j][i]==false){
+                a+=10;
+                b+=10;     
+              }
+              if(a<=ancho && b<=alto){
+                return true;
+              }
+            }
+         }
+         
+         
+     
+     return false;
+     }
+     
+     public int rpn (String[] cadena){ 
+         int[] auxiliar={0,0,0,0,0,0,0,0,0}; //Declaramos un array de ints donde vamos a guardar los valores y resultados de operaciones
+         int contador=0; //posición en el array vacío (auxiliar).
+         int operacion=0; //Donde vamos a hacer los cálculos.
+         int aux=0;
+         boolean fallo=false; //booleano que vamos a usar en caso de error.
+         
+         for(int i=0;i<cadena.length;i++){
+             if(contador>=3 && (!cadena[i].equals("+") && !cadena[i].equals("-") && !cadena[i].equals("*") && !cadena[i].equals("/"))){
+                System.out.println("error!"); //Mensaje de error en caso que no se pueda hacer una operación.
+                fallo=true; //fallo lo ponemos a true.
+             }
+            if(!cadena[i].equals("+") && !cadena[i].equals("-") && !cadena[i].equals("*") && !cadena[i].equals("/")){
+                    aux=Integer.valueOf(cadena[i]); //Cuando nos encontremos con un número le cambiamos el valor de String a int
+                    auxiliar[contador]+=aux; //Guardamos el valor en el array de ints que hemos declarado.
+                    contador++; //Sumamos uno a contador.
+                    
+            }else{ //En caso que nos encontremos con un operador.
+              if(cadena[i].equals("+")){
+                 operacion=auxiliar[contador-2]+auxiliar[contador-1]; //Cogeremos los dos valores guardados en la pila y haremos la operación.
+                 auxiliar[contador-2]=0; //Sacamos los dos valores de la pila situando su valor en las posiciones correctas a 0.
+                 auxiliar[contador-1]=0;
+                 contador-=2; //Contador lo reseteamos a la posición del primer número de la operación.
+                 auxiliar[contador]=operacion; //Guardamos en esa posición el valor que nos ha dado la operación.
+                 contador++; //Sumamos 1 a contador para poder guardar valores en la siguente posición en el array.
+                 
+              }        
+              if(cadena[i].equals("*")){
+                 operacion=auxiliar[contador-2]*auxiliar[contador-1];
+                 auxiliar[contador-2]=0;
+                 auxiliar[contador-1]=0;
+                 contador-=2;
+                 auxiliar[contador]=operacion;
+                 contador++;
+                 
+              }
+              if(cadena[i].equals("-")){
+                 operacion=auxiliar[contador-2]-auxiliar[contador-1];
+                 auxiliar[contador-2]=0;
+                 auxiliar[contador-1]=0;
+                 contador-=2;
+                 auxiliar[contador]=operacion;
+                 contador++;
+              }
+              if(cadena[i].equals("/")){
+                 operacion=auxiliar[contador-2]/auxiliar[contador-1];
+                 auxiliar[contador-2]=0;
+                 auxiliar[contador-1]=0;
+                 contador-=2;
+                 auxiliar[contador]=operacion;
+                 contador++;
+              }
+              
+              
+            }
+         
+         }
+        
+         if(fallo==true){ //En caso que hayamos encontrado un fallo, retornamos 0.
+           return 0;     
+         }else{
+         return operacion; //Retornamos el valor de la operación.
+         }
+     
+     }
     
     
     
@@ -298,7 +386,7 @@ public class EjerciciosJava {
       int n=6;
       System.out.println(ejercicio6.calendario(n));*/
       
-       EjerciciosJava ejercicio7=new EjerciciosJava();
+      /* EjerciciosJava ejercicio7=new EjerciciosJava();
       	char	[][]	listaPalabras	={
 					{'P',	'A',	'T',	'A'},
 					{'P',	'A',	'T',	'O'},
@@ -308,7 +396,7 @@ public class EjerciciosJava {
 					{'G',	'A',	'T',	'O'},
 					{'M',	'A',	'T',	'O'},
 								};
-        System.out.println(ejercicio7.escalera(listaPalabras));
+        System.out.println(ejercicio7.escalera(listaPalabras));*/
        
       /* EjerciciosJava ejercicio8=new EjerciciosJava();
        //String a="ACGT";
@@ -323,6 +411,22 @@ public class EjerciciosJava {
       String str1="variable";
       String str2="ajo";
       System.out.println(ejercicio9.strstr(str1,str2));*/
+      
+     /* EjerciciosJava ejercicio10=new EjerciciosJava();
+      int ancho=20;
+      int alto=30;
+      boolean[][] camion={
+			 {true,	true,	true,	false,	false,	true,	true,	true},
+			 {true,	true,	true,	false,	false,	true,	true,	true},
+			 {true,	true,	true,	false,	false,	true,	true,	true},
+			 {true,	true,	true,	true,	true,	true,	false,	false },
+			 {true,	true,	true,	true,	true,	true,	false,	false }
+								};
+      System.out.println(ejercicio10.mudanzasJava(camion, ancho, alto));*/
+     
+     EjerciciosJava ejercicio11= new EjerciciosJava();
+     String[] cadena={"3","2","+","7","*","15","21","-","-"};
+     System.out.println(ejercicio11.rpn(cadena));
       
 }
     
