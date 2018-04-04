@@ -271,20 +271,26 @@ public class EjerciciosJava {
          int b=0;
          
          for(int j=0;j<camion.length;j++){
-            for(int i=0;i<camion[i].length;i++){
-              while(camion[j][i]==false){
-                a+=10;
-                b+=10;     
-              }
-              if(a<=ancho && b<=alto){
-                return true;
-              }
+            for(int i=0;i<camion[0].length;i++){
+              while(j+1<camion.length && camion[j][i]==false){
+                  b+=10;
+
+                  while(i+1<camion[0].length && camion[j][i]==false){
+                   a+=10;
+                   i++;
+                   j++;
+                   
+                 }
+              }  
             }
          }
          
+         if(a==ancho && b==alto || a==alto && b==ancho){
+            return true;
+         }else{
+           return false;
+         }
          
-     
-     return false;
      }
      
      public int rpn (String[] cadena){ 
@@ -352,6 +358,46 @@ public class EjerciciosJava {
          }
      
      }
+     
+     //Clash Royale
+         public boolean chequeaAtaque(int[][] piezas, int ataque) {
+
+        for (int j = 0; j < piezas.length; j++) {
+            for (int i = 0; i < piezas[0].length; i++) {
+
+                if (j != ataque && piezas[j][6]==0) {
+                    if (piezas[ataque][2] == piezas[j][2] && piezas[ataque][3] == piezas[j][3]) {
+
+                        piezas[j][1] = -4;
+                    }
+
+                    if ((piezas[j][2] == piezas[ataque][2] - 1 && piezas[j][3] == piezas[ataque][3] - 1)
+                            || (piezas[j][2] == piezas[ataque][2] + 1 && piezas[j][3] == piezas[ataque][3] - 1)
+                            || (piezas[j][2] == piezas[ataque][2] - 1 && piezas[j][3] == piezas[ataque][3] + 1)
+                            || (piezas[j][2] == piezas[ataque][2] + 1 && piezas[j][3] == piezas[ataque][3] + 1)) {
+
+                        piezas[j][1] = -1;
+                    }
+                    if ((piezas[j][2] == piezas[ataque][2] - 1 && piezas[j][3] == piezas[ataque][3])
+                            || (piezas[j][2] == piezas[ataque][2] + 1 && piezas[j][3] == piezas[ataque][3])
+                            || (piezas[j][2] == piezas[ataque][2] && piezas[j][3] == piezas[ataque][3] - 1)
+                            || (piezas[j][2] == piezas[ataque][2] && piezas[j][3] == piezas[ataque][3] + 1)) {
+
+                        piezas[j][1] = -2;
+                    }
+
+                    if (piezas[j][1] < 0) {
+                        return true;
+                    }
+                    
+                    System.out.println(piezas[j][1]);
+                }
+            }
+        }
+
+        return false;
+
+    }
     
     
     
@@ -412,7 +458,7 @@ public class EjerciciosJava {
       String str2="ajo";
       System.out.println(ejercicio9.strstr(str1,str2));*/
       
-     /* EjerciciosJava ejercicio10=new EjerciciosJava();
+      /*EjerciciosJava ejercicio10=new EjerciciosJava();
       int ancho=20;
       int alto=30;
       boolean[][] camion={
@@ -424,9 +470,18 @@ public class EjerciciosJava {
 								};
       System.out.println(ejercicio10.mudanzasJava(camion, ancho, alto));*/
      
-     EjerciciosJava ejercicio11= new EjerciciosJava();
+    /* EjerciciosJava ejercicio11= new EjerciciosJava();
      String[] cadena={"3","2","+","7","*","15","21","-","-"};
-     System.out.println(ejercicio11.rpn(cadena));
+     System.out.println(ejercicio11.rpn(cadena));*/
+    
+    EjerciciosJava ejercicio12= new EjerciciosJava();
+    int[][] arena= new int[14][18];
+    int[][] piezas={
+                   {2, 211, 9, 3, 1, 1, 0},
+                   {67, 950, 9, 4, 1, 1, 1},
+                   {257, 100, 9, 4, 0, 0, 0}
+                      };
+    System.out.println(ejercicio12.chequeaAtaque(piezas, 2));
       
 }
     
